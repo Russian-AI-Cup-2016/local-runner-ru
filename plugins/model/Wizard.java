@@ -38,9 +38,10 @@ public class Wizard extends LivingUnit {
         this.level = level;
         this.skills = Arrays.copyOf(skills, skills.length);
         this.remainingActionCooldownTicks = remainingActionCooldownTicks;
-        this.remainingCooldownTicksByAction = Arrays.copyOf(remainingCooldownTicksByAction, remainingCooldownTicksByAction.length);
+        this.remainingCooldownTicksByAction = remainingCooldownTicksByAction == null
+                ? new int[0] : Arrays.copyOf(remainingCooldownTicksByAction, remainingCooldownTicksByAction.length);
         this.master = master;
-        this.messages = Arrays.copyOf(messages, messages.length);
+        this.messages = messages == null ? new Message[0] : Arrays.copyOf(messages, messages.length);
     }
 
     /**
