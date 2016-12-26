@@ -15,4 +15,13 @@ if "%JAVA_HOME%" neq "" (
 )
 
 :java-start
-start "" "%JAVA_BIN:"=%javaw" -Xms512m -Xmx1G -XX:+UseConcMarkSweepGC -jar "local-runner.jar" local-runner-replay.properties local-runner-replay.default.properties %*
+
+set JAVA_PARAMETERS=
+
+if "%NUMBER_OF_PROCESSORS%" neq "" (
+    if %NUMBER_OF_PROCESSORS% gtr 4 (
+        set JAVA_PARAMETERS= -XX:+UseConcMarkSweepGC
+    )
+)
+
+start "" "%JAVA_BIN:"=%javaw" -Xms512m -Xmx1G%JAVA_PARAMETERS% -jar "local-runner.jar" local-runner-replay.properties local-runner-replay.default.properties %*
